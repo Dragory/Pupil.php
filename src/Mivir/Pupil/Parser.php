@@ -30,7 +30,7 @@ implements ParserInterface
 		$currentFunction = null;
 		$flushFunction   = true;
 
-		$accept = [
+		$accept = array(
 			'identifier' => 0,
 			'string' => 0,
 			'number' => 0,
@@ -43,11 +43,11 @@ implements ParserInterface
 			'blockEnd' => 0,
 			'ternaryThen' => 0,
 			'ternaryElse' => 0
-		];
+		);
 
 		$expectOneOf = function($oneOf) use (&$accept) {
 			// O(n) to be able to O(1) the "one of" values later on
-			$oneOfKeys = [];
+			$oneOfKeys = array();
 			foreach ($oneOf as $key => $value) {
 				$oneOfKeys[$value] = true;
 			}
@@ -66,7 +66,7 @@ implements ParserInterface
 		// Loop through the tokens in the tokenized string
 		for ($i = 0; $i < count($tokenized); $i++) {
 			$thisToken = $tokenized[$i];
-			$entitiesToPush = [];
+			$entitiesToPush = array();
 
 			$openBlock  = false;
 			$closeBlock = false;

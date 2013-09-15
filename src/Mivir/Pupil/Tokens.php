@@ -4,7 +4,7 @@ namespace Mivir\Pupil;
 class Tokens
 implements TokensInterface
 {
-	protected $tokens = [
+	protected $tokens = array(
 		'IDENTIFIER' => 1,
 		'COMMA' => 2,
 		'COLON' => 3,
@@ -16,9 +16,9 @@ implements TokensInterface
 		'LOGICAL_NOT' => 9,
 		'BRACKET_OPEN' => 10,
 		'BRACKET_CLOSE' => 11
-	];
+	);
 
-	protected $reverseTokens = [];
+	protected $reverseTokens = array();
 
 	public function __construct()
 	{

@@ -4,7 +4,7 @@ namespace Mivir\Pupil;
 class Lexer
 implements LexerInterface
 {
-	protected $tokens = [];
+	protected $tokens = array();
 
 	public function __construct(TokensInterface $tokens)
 	{
@@ -56,7 +56,7 @@ implements LexerInterface
 
 			// Reset some variables for this loop
 			$appendToTempIdentifier = false;
-			$tokensToPush = [];
+			$tokensToPush = array();
 			$ignoreThisChar = false;
 
 			// This char was escaped, count as an identifier.
@@ -84,23 +84,23 @@ implements LexerInterface
 			
 			// General tokens
 			} else if ($thisChar == ',') {
-			    $tokensToPush[] = [$tokens->COMMA];
+			    $tokensToPush[] = array($tokens->COMMA);
 			} else if ($thisChar == ':') {
-			    $tokensToPush[] = [$tokens->COLON];
+			    $tokensToPush[] = array($tokens->COLON);
 			} else if ($thisChar == '?') {
-				$tokensToPush[] = [$tokens->QUESTION_MARK];
+				$tokensToPush[] = array($tokens->QUESTION_MARK);
 			} else if ($thisChar == '&' && $nextChar == '&') {
-			    $tokensToPush[] = [$tokens->LOGICAL_AND];
+			    $tokensToPush[] = array($tokens->LOGICAL_AND);
 			    $i++;
 			} else if ($thisChar == '|' && $nextChar == '|') {
-			    $tokensToPush[] = [$tokens->LOGICAL_OR];
+			    $tokensToPush[] = array($tokens->LOGICAL_OR);
 			    $i++;
 			} else if ($thisChar == '!') {
-			    $tokensToPush[] = [$tokens->LOGICAL_NOT];
+			    $tokensToPush[] = array($tokens->LOGICAL_NOT);
 			} else if ($thisChar == '(') {
-			    $tokensToPush[] = [$tokens->BRACKET_OPEN];
+			    $tokensToPush[] = array($tokens->BRACKET_OPEN);
 			} else if ($thisChar == ')') {
-			    $tokensToPush[] = [$tokens->BRACKET_CLOSE];
+			    $tokensToPush[] = array($tokens->BRACKET_CLOSE);
 
 			// Ignore whitespace unless we're in a string
 			} else if (preg_match($whiteSpaceRegex, $thisChar)) {
