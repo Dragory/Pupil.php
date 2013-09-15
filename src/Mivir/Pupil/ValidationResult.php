@@ -74,13 +74,12 @@ implements ValidationResultInterface, \Iterator
 
 	public function current()
 	{
-		$thisResult = $this->results[$this->position];
-		return array($thisResult[0] => $thisResult[1]);
+		return $this->results[$this->position][1];
 	}
 
 	public function key()
 	{
-		return $this->position;
+		return $this->results[$this->position][0];
 	}
 
 	public function next()
