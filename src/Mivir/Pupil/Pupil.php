@@ -8,6 +8,8 @@ implements PupilInterface
 
 	protected $validatorFunctionContainer = null;
 
+	protected $validationResultFactory = null;
+
 	protected $lexer = null;
 
 	protected $parser = null;
@@ -18,13 +20,15 @@ implements PupilInterface
 
 	public function __construct(
 		CacherInterface $cacher = null,
+		ValidationResultFactoryInterface $validationResultFactory = null,
+		TokensInterface $tokens = null,
 		LexerInterface $lexer = null,
 		ParserInterface $parser = null,
 		ValidatorInterface $validator = null,
 		ValidatorFunctionContainerInterface $validatorFunctionContainer = null
 	)
 	{
-		$this->tokens = new Tokens();
+		$this->tokens = ($tokens ? $tokens : new Tokens());
 
 		if ( ! $parser) {
 			$entityFactory = new EntityFactory();
@@ -34,6 +38,8 @@ implements PupilInterface
 		}
 
 		$this->validatorFunctionContainer = ($validatorFunctionContainer ? $validatorFunctionContainer : new DefaultValidatorFunctionContainer());
+
+		$this->validationResultFactory = ($validationResultFactory ? $validationResultFactory : new ValidationResultFactory());
 
 		$this->lexer     = ($lexer     ? $lexer     : new Lexer($this->tokens));
 		$this->validator = ($validator ? $validator : new Validator($this->validatorFunctionContainer));
@@ -76,6 +82,6 @@ implements PupilInterface
 			$results[$index] = $this->validator->validate($parsedRule, $values, $index);
 		}
 
-		return $results;
+		return $this->validationResultFactory->getNewInstance($results);
 	}
 }
